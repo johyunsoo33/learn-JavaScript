@@ -1,7 +1,22 @@
 function solution(hp) {
     var answer = 0;
-    var first = parseInt(hp/5);
-    var second = parseInt((hp%5)/3);
-    var last = parseInt((hp%5)%3/1)
-    return answer=first+second+last;
+    let generalAnt = 0;
+    let solderAnt = 0;
+    let normalAnt = 0;    
+    while(hp>0){
+        if(hp>=5){
+            hp =hp- 5;
+            generalAnt++;
+        }
+        if(hp<5 && hp>=3){
+            hp =hp-3;
+            solderAnt++;
+        }
+        if(hp>0 && hp<3){
+            hp = hp -1;
+            normalAnt++;
+        }
+        answer = generalAnt+solderAnt+normalAnt;
+    }
+    return answer;
 }
