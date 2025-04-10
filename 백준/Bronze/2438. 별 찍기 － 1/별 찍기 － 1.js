@@ -1,5 +1,26 @@
-const fs = require("fs");
-const input = fs.readFileSync(0).toString().trim().split(" ");
-for (let i = 1; i <= input; i++) {
-  console.log("*".repeat(i));
+function main() {
+  const data = getData();
+  for (let i = 1; i <= data; i++) {
+    let stars = "";
+    for (let k = 1; k <= i; k++) {
+      stars += "*";
+    }
+    console.log(stars);
+  }
+}
+main();
+
+function getData() {
+  const fs = require("fs");
+  const fileData = fs.readFileSync(0).toString();
+  const arr = fileData.trim().split("\n");
+  const result = [];
+  for (let row of arr) {
+    const rowArr = row.split(" ");
+    for (let k = 0; k < rowArr.length; k++) {
+      rowArr[k] = isNaN(rowArr[k]) ? rowArr[k] : parseInt(rowArr[k]);
+    }
+    result.push(rowArr.length === 1 ? rowArr[0] : rowArr);
+  }
+  return result.length === 1 ? result[0] : result;
 }
