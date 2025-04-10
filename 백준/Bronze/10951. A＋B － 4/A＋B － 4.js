@@ -1,7 +1,23 @@
-const fs = require("fs");
-const input = fs.readFileSync(0).toString().trim().split("\n");
-for (let i = 0; i < input.length; i++) {
-  let a = parseInt(input[i].split(" ")[0]);
-  let b = parseInt(input[i].split(" ")[1]);
-  console.log(a + b);
+function main() {
+  const data = getData();
+  for (let i = 0; i < data.length; i++) {
+    let result = data[i][0] + data[i][1];
+    console.log(result);
+  }
+}
+main();
+
+function getData() {
+  const fs = require("fs");
+  const fileData = fs.readFileSync(0).toString();
+  const arr = fileData.trim().split("\n");
+  const result = [];
+  for (let row of arr) {
+    const rowArr = row.split(" ");
+    for (let k = 0; k < rowArr.length; k++) {
+      rowArr[k] = isNaN(rowArr[k]) ? rowArr[k] : parseInt(rowArr[k]);
+    }
+    result.push(rowArr.length === 1 ? rowArr[0] : rowArr);
+  }
+  return result.length === 1 ? result[0] : result;
 }
