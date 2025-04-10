@@ -1,11 +1,12 @@
 const fs = require("fs");
-const input = fs.readFileSync(0).toString().trim().split("\n");
-let testNum = parseInt(input[0]);
-let output = [];
+const fileData = fs.readFileSync(0).toString().trim().split("\n");
 
-for (let i = 1; i <= testNum; i++) {
-  let [a, b] = input[i].split(" ").map(Number);
-  output.push(a + b);
+let T = parseInt(fileData[0])
+let list = [];
+for (let i = 1; i <= T; i++) {
+  const data = fileData[i].split(" ");
+  const A = parseInt(data[0]);
+  const B = parseInt(data[1]); 
+  list.push(A + B);
 }
-
-console.log(output.join("\n"));
+console.log(list.join("\n"));
