@@ -1,16 +1,28 @@
-const fs = require("fs");
-const input = fs.readFileSync(0).toString().trim().split("\n");
-const bucketNum = parseInt(input[0].split(" ")[0]);
-const totalList = parseInt(input[0].split(" ")[1]);
-let arr = new Array(bucketNum).fill(0);
-
-for (let i = 1; i <= totalList; i++) {
-  let ballFirst = parseInt(input[i].split(" ")[0]);
-  let ballLast = parseInt(input[i].split(" ")[1]);
-  let ballNum = parseInt(input[i].split(" ")[2]);
-
-  for (let j = ballFirst - 1; j < ballLast; j++) {
-    arr[j] = ballNum;
+function main() {
+  const data = getData();
+  let arr = new Array(data[0][0]).fill(0);
+  for (let i = 1; i < data.length; i++) {
+    let ballFirst = data[i][0];
+    let ballLast = data[i][1];
+    let ballNum = data[i][2];
+    for (let j = ballFirst - 1; j < ballLast; j++) {
+      arr[j] = ballNum;
+    }
   }
+  console.log(arr.join(" "));
 }
-console.log(arr.join(" "));
+main();
+function getData() {
+  const fs = require("fs");
+  const fileData = fs.readFileSync(0).toString();
+  const arr = fileData.trim().split("\n");
+  const result = [];
+  for (let row of arr) {
+    const rowArr = row.split(" ");
+    for (let k = 0; k < rowArr.length; k++) {
+      rowArr[k] = isNaN(rowArr[k]) ? rowArr[k] : parseInt(rowArr[k]);
+    }
+    result.push(rowArr.length === 1 ? rowArr[0] : rowArr);
+  }
+  return result.length === 1 ? result[0] : result;
+}
